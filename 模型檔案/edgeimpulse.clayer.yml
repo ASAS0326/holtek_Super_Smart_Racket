@@ -1,0 +1,11 @@
+layer:
+  type: Edge Impulse layer
+  description: Edge Impulse SDK and model
+
+  packs:
+    - pack: EdgeImpulse::EI-SDK@1.93.26
+    - pack: EdgeImpulse::pinpon@1.0.0
+
+  components:
+    - component: EdgeImpulse::EdgeImpulse:SDK@1.93.26
+    - component: EdgeImpulse:model:pinpon@1.0.0
