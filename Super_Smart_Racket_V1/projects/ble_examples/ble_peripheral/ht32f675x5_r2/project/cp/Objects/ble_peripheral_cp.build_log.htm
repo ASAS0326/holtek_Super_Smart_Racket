@@ -1,0 +1,101 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: £gVision V5.43.1.0
+Copyright (C) 2025 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: ASASA corn910922@gmail.com, ASA, LIC=EPPLD-8LGXD-TLNCD-8RMP7-EDBA6-96KQ8
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.43.0.0
+Toolchain Path:  C:\Users\corn9\AppData\Local\Keil_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.24
+Assembler:       Armasm.exe V6.24
+Linker/Locator:  ArmLink.exe V6.24
+Library Manager: ArmAr.exe V6.24
+Hex Converter:   FromElf.exe V6.24
+CPU DLL:         SARMCM3.DLL V5.43.0.0
+Dialog DLL:      DARMCM1.DLL V1.19.6.0
+Target DLL:      UL2CM3.DLL V1.164.16.0
+Dialog DLL:      TARMCM1.DLL V1.14.6.0
+ 
+<h2>Project:</h2>
+C:\Users\corn9\Desktop\holtek_Super_Smart_Racket\Super_Smart_Racket_V1\projects\ble_examples\ble_peripheral\ht32f675x5_r2\project\cp\ble_peripheral_cp.uvprojx
+Project File Date:  09/11/2026
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.24', folder: 'C:\Users\corn9\AppData\Local\Keil_v5\ARM\ARMCLANG\Bin'
+Rebuild Project 'ble_peripheral_cp' - Target 'ble_peripheral_cp'
+compiling mlog_transport_uart.c...
+compiling system_ARMCM0plus.c...
+compiling ble_gatt_service.c...
+assembling startup_ARMCM0plus.s...
+compiling shared_memory.c...
+compiling lpwr_ctrl.c...
+compiling ble_mus.c...
+compiling ble_gap_service.c...
+compiling ble_dis.c...
+compiling rf_init.c...
+compiling main.c...
+compiling ble_interface_init.c...
+compiling app_debug.c...
+compiling err_debug.c...
+compiling ble_trx_service_integrated.c...
+compiling idle_task.c...
+compiling mlog_protocol.c...
+compiling app_timer.c...
+C:\Users\corn9\Desktop\holtek_Super_Smart_Racket\Super_Smart_Racket_V1\sources\projects_source\ble_examples\ble_peripheral\ht32f675x5_r2\ble\ble_peripheral\ble_peripheral.c(119): warning: variable length array folded to constant array as an extension [-Wgnu-folding-constant]
+  119 |     uint8_t u8ScanResponseData[strlen(BLE_ADV_NAME_STRING) + 2];
+      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 warning generated.
+compiling ble_peripheral.c...
+compiling ble_event.c...
+compiling ble_init.c...
+compiling ble_host_init.c...
+compiling ble_controller_init.c...
+compiling app_main.c...
+linking...
+Program Size: Code=22196 RO-data=1224 RW-data=24 ZI-data=34236  
+FromELF: creating hex file...
+After Build - User command #1: .\ble_peripheral_cp.bat ".\Objects\ble_peripheral_cp.axf" "C:\Users\corn9\AppData\Local\Keil_v5\ARM\ARMCLANG\bin\fromelf.exe"
+"Fromelf file valid!"
+"Make bin success!"
+"Make asm success!"
+"Make app success!"
+"Make done!"
+After Build - User command #2: ..\..\..\..\..\..\tools\mlog\gen_mlog.bat  ble_peripheral_cp  ..\..\..\..\..\..
+len=3 sys.argv[1]=ble_peripheral_cp
+force refrash = 1
+find uvprojx ble_peripheral_cp.uvprojx
+----------------------------------------
+||| total 75 MLOG(s) update 75 MLOG(s) , 0 error(s), 0 warning(s),
+----------------------------------------
+"Make mlog success!"
+".\Objects\ble_peripheral_cp.axf" - 0 Error(s), 1 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                https://www.keil.com/pack/ARM.CMSIS.6.3.0.pack
+                ARM::CMSIS@6.3.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 6.2.0
+
+Package Vendor: Holtek
+                https://mcu.holtek.com.tw/pack/Holtek.HT32F675x5_DFP.1.0.5.pack
+                Holtek::HT32F675x5_DFP@1.0.5
+                Holtek HT32F675x5 Series Device Support
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/_ble_peripheral_cp
+  C:/Users/corn9/AppData/Local/Arm/Packs/ARM/CMSIS/6.3.0/CMSIS/Core/Include
+  C:/Users/corn9/AppData/Local/Arm/Packs/Holtek/HT32F675x5_DFP/1.0.5/Device/Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE@6.2.0
+Build Time Elapsed:  00:00:06
+</pre>
+</body>
+</html>

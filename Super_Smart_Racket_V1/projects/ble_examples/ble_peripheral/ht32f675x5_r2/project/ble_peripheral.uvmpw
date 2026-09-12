@@ -15,6 +15,7 @@
   <project>
     <PathAndName>.\mp\ble_peripheral_mp.uvprojx</PathAndName>
     <NodeIsActive>1</NodeIsActive>
+    <NodeIsExpanded>1</NodeIsExpanded>
   </project>
 
 </ProjectWorkspace>

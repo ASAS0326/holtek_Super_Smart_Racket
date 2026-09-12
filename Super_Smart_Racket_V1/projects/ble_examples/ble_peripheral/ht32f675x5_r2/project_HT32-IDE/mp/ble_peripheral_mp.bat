@@ -45,6 +45,6 @@ if %ERRORLEVEL% neq 0 (
     echo "Make text success!"
 )
 
-copy /y %PROJECT_NAME%.hex ..\..\..\hex\%DST_FILE%.hex
+copy /y %PROJECT_NAME%.hex ..\..\hex\%DST_FILE%.hex
 
 ::pause

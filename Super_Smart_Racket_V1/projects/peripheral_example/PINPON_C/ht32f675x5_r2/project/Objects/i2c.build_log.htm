@@ -1,0 +1,74 @@
+<html>
+<body>
+<pre>
+<h1>猩ision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: μVision V5.43.1.0
+Copyright (C) 2025 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: ASASA corn910922@gmail.com, ASA, LIC=EPPLD-8LGXD-TLNCD-8RMP7-EDBA6-96KQ8
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.43.0.0
+Toolchain Path:  C:\Users\corn9\AppData\Local\Keil_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.24
+Assembler:       Armasm.exe V6.24
+Linker/Locator:  ArmLink.exe V6.24
+Library Manager: ArmAr.exe V6.24
+Hex Converter:   FromElf.exe V6.24
+CPU DLL:         
+Dialog DLL:      
+Target DLL:      CMSIS_AGDI_V8M.DLL V1.8.8.0
+Dialog DLL:      TCM.DLL V1.56.6.0
+ 
+<h2>Project:</h2>
+C:\Users\corn9\Desktop\ht32f67595_edgeimpulse\HT\projects\peripheral_example\PINPON_C\ht32f675x5_r2\project\i2c.uvprojx
+Project File Date:  05/22/2026
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.24', folder: 'C:\Users\corn9\AppData\Local\Keil_v5\ARM\ARMCLANG\Bin'
+Rebuild target 'i2c'
+assembling startup_ARMCM33.s...
+compiling ht32f675x5_boot2_lib_r2_v1.1.c...
+compiling system_ARMCM33.c...
+compiling app_debug.c...
+compiling main.c...
+compiling err_debug.c...
+compiling LSM6DS3.c...
+i2c.c(610): warning: comparison of different enumeration types ('EN_ERR_STA_T' and 'EN_I2C_MASTER_STAT_T') [-Wenum-compare]
+  610 |         if (ERR_STA_OK != enMasterSta)
+      |             ~~~~~~~~~~ ^  ~~~~~~~~~~~
+1 warning generated.
+compiling i2c.c...
+linking...
+Program Size: Code=11442 RO-data=6422 RW-data=4 ZI-data=4580  
+FromELF: creating hex file...
+After Build - User command #1: fromelf.exe --text -c -o "C:\Users\corn9\Desktop\ht32f67595_edgeimpulse\HT\projects\peripheral_example\PINPON_C\ht32f675x5_r2\project\Objects\i2c.asm"  ".\Objects\i2c.axf"
+After Build - User command #2: cmd /c copy /y .\Objects\i2c.hex ..\hex\i2c.hex
+複製了         1 個檔案。
+".\Objects\i2c.axf" - 0 Error(s), 1 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                https://www.keil.com/pack/ARM.CMSIS.6.3.0.pack
+                ARM::CMSIS@6.3.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 6.2.0
+
+Package Vendor: Holtek
+                https://mcu.holtek.com.tw/pack/Holtek.HT32F675x5_DFP.1.0.5.pack
+                Holtek::HT32F675x5_DFP@1.0.5
+                Holtek HT32F675x5 Series Device Support
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/_i2c
+  C:/Users/corn9/AppData/Local/Arm/Packs/ARM/CMSIS/6.3.0/CMSIS/Core/Include
+  C:/Users/corn9/AppData/Local/Arm/Packs/Holtek/HT32F675x5_DFP/1.0.5/Device/Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE@6.2.0
+Build Time Elapsed:  00:00:02
+</pre>
+</body>
+</html>

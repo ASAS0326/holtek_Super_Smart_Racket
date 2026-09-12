@@ -38,11 +38,13 @@
 static osRtxThread_t m_appMainCB __attribute__((aligned(4), section(".bss.os.thread.cb")));
 static uint64_t      m_u64AppMainStack[128];
 
+
 /**
  * @brief  Extern functions
  * @param  argument
  */
 extern void app_main(void *argument);
+
 
 /**
  * @brief  main function
@@ -50,7 +52,7 @@ extern void app_main(void *argument);
  */
 int main(void)
 {
-    const osThreadAttr_t attr = {
+    const osThreadAttr_t app_attr = {
         "app_main",
         osThreadJoinable,
         &m_appMainCB,
@@ -61,9 +63,11 @@ int main(void)
         0,
     };
 
-    osKernelInitialize();               // Initialize CMSIS-RTOS
-    osThreadNew(app_main, NULL, &attr); // Create application main thread
-    osKernelStart();                    // Start thread execution
+    osKernelInitialize();
+
+    osThreadNew(app_main, NULL, &app_attr);
+
+    osKernelStart();
 
     for (;;);
 

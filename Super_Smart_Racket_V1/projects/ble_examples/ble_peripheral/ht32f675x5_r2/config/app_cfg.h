@@ -113,10 +113,24 @@
 #define UART_BPS_CP_MLOG                   (460800)
 
 //=============================================================================
+// i2c pins
+//=============================================================================
+// i2c pins
+#define GPIO_PORT_I2C_SCLK                 (GPIOB)
+#define GPIO_PIN_I2C_SCLK                  (GPIO_PIN_9)
+#define GPIO_PORT_I2C_SDA                  (GPIOB)
+#define GPIO_PIN_I2C_SDA                   (GPIO_PIN_7)
+
+#define I2C_HANDLE                         (I2C1)
+#define I2C_RX_DMA_HANDLE                  (DMA6)
+#define I2C_TX_DMA_HANDLE                  (DMA7)
+
+
+//=============================================================================
 // BLE
 //=============================================================================
 #define BLE_ADV_INTERVAL_MS                MSEC_TO_UNITS(100, UNIT_0_625_MS)
-#define BLE_ADV_NAME_STRING                ("HT32F675x5_BLE_PERIPHERAL")
+#define BLE_ADV_NAME_STRING                ("Super_Smart_Racket")
 #define BLE_DEVICE_MAC                     {0x55, 0x40, 0x4D, 0x03, 0x03, 0xBA}
 
 
@@ -151,7 +165,7 @@
     #define MLOG_DEBUG_ENABLED             (0)
 #else
     #define APP_DEBUG_ENABLED              (1)
-    #define MLOG_DEBUG_ENABLED             (0)
+    #define MLOG_DEBUG_ENABLED             (1)
 #endif
 
 #if APP_DEBUG_ENABLED
