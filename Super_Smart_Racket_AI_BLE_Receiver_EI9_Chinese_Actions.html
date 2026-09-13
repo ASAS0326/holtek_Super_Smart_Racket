@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Super Smart Racket AI Receiver - EI9 Label Fixed</title>
+<style>
+:root{
+  --bg:#071321;
+  --panel:#0d1b2b;
+  --border:#29415c;
+  --text:#f4f7fb;
+  --muted:#86a9cf;
+  --ok:#46e0a3;
+  --danger:#ff6678;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+.wrap{
+  width:min(1460px,calc(100% - 30px));
+  margin:28px auto 50px;
+}
+.top{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  align-items:flex-start;
+}
+.title h1{margin:0;font-size:36px}
+.sub{color:var(--muted);margin-top:6px}
+.status{
+  border:1px solid var(--border);
+  border-radius:999px;
+  padding:10px 15px;
+  color:var(--muted);
+  white-space:nowrap;
+}
+.status.on{color:var(--ok)}
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:20px 0;
+}
+button{
+  border:0;
+  border-radius:10px;
+  padding:12px 18px;
+  font-weight:700;
+  color:#fff;
+  background:#2f6eae;
+  cursor:pointer;
+}
+button.red{background:#7a3040}
+button.gray{background:#253e5d}
+button:disabled{opacity:.5;cursor:not-allowed}
+.main-layout{
+  display:grid;
+  grid-template-columns:minmax(680px,1fr) 390px;
+  gap:18px;
+  align-items:start;
+}
+.main-layout.log-hidden{
+  grid-template-columns:1fr;
+}
+.left-column{
+  min-width:0;
+}
+.log-column{
+  position:sticky;
+  top:18px;
+}
+.main-layout.log-hidden .log-column{
+  display:none;
+}
+.panel{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:18px;
+}
+.panel h2{font-size:17px;margin:0 0 18px}
+.result{
+  font-size:76px;
+  font-weight:900;
+  min-height:105px;
+  display:flex;
+  align-items:center;
+}
+.cap{
+  color:var(--muted);
+  font-size:13px;
+  letter-spacing:2px;
+}
+.conf{font-size:34px;font-weight:800}
+.bar{
+  height:12px;
+  background:#203954;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:8px;
+}
+.bar>div{
+  height:100%;
+  width:0;
+  background:var(--ok);
+  transition:.12s;
+}
+.note{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.5;
+  margin-top:10px;
+}
+.scores{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(115px,1fr));
+  gap:10px;
+}
+.score{
+  background:#102035;
+  border:1px solid #223d5b;
+  border-radius:12px;
+  padding:12px;
+}
+.score.best{border-color:var(--ok)}
+.score .l{
+  font-size:13px;
+  color:var(--muted);
+}
+.score .v{
+  font-size:21px;
+  font-weight:800;
+  margin-top:5px;
+}
+.log{
+  font-family:ui-monospace,Consolas,monospace;
+  background:#06111e;
+  border:1px solid #223b56;
+  border-radius:12px;
+  padding:13px;
+  height:430px;
+  overflow:auto;
+  line-height:1.55;
+  font-size:13px;
+}
+.ok{color:var(--ok)}
+.bad{color:var(--danger)}
+@media(max-width:1120px){
+  .main-layout{grid-template-columns:1fr}
+  .log-column{position:static}
+}
+@media(max-width:820px){
+  .top{flex-direction:column}
+  .title h1{font-size:30px}
+  .result{font-size:54px}
+  .scores{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="title">
+      <h1>Super Smart Racket</h1>
+      <div class="sub">Edge Impulse 9.0.0 · 反手：切 / 拍 / 拉 · 正手：切 / 拍 / 拉</div><div class="note">EI9：BC=反手切、BP=反手拍、BS=反手拉、FC=正手切、FP=正手拍、FS=正手拉、NONE=無動作</div>
+    </div>
+    <div id="status" class="status">● 未連線</div>
+  </div>
+
+  <div class="actions">
+    <button id="connect">連接 BLE</button>
+    <button id="disconnect" class="red" disabled>中斷連線</button>
+    <button id="clear" class="gray">清除 Log</button>
+    <button id="toggleLog" class="gray">隱藏 Log</button>
+  </div>
+
+  <div id="mainLayout" class="main-layout">
+    <div class="left-column">
+      <section class="panel">
+        <h2>目前 AI 辨識結果</h2>
+        <div id="result" class="result">--</div>
+        <div class="cap">CONFIDENCE</div>
+        <div id="confidence" class="conf">0.00%</div>
+        <div class="bar"><div id="confbar"></div></div>
+        <div id="wait" class="note">等待 AI Notify...</div>
+      </section>
+
+      <section class="panel">
+        <h2>7 類模型分數</h2>
+        <div id="scores" class="scores"></div>
+      </section>
+    </div>
+
+    <aside class="log-column">
+      <section class="panel">
+        <h2>Log</h2>
+        <div id="log" class="log"></div>
+      </section>
+    </aside>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+const SERVICE_UUID="0000fff0-0000-1000-8000-00805f9b34fb";
+const NOTIFY_UUID="0000fff1-0000-1000-8000-00805f9b34fb";
+
+const FRAME_SIZE=32;
+const SYNC0=0xAA;
+const SYNC1=0x55;
+const VERSION=0x01;
+const TYPE_AI=0x02;
+
+const LABELS=["BC","BP","BS","FC","FP","FS","NONE"];
+const LABEL_NAMES=["反手切","反手拍","反手拉","正手切","正手拍","正手拉","無動作"];
+const UI_VERSION="EI9_CHINESE_ACTION_LABELS_V3";
+const MAX_LOG_LINES=200;
+
+let device=null;
+let server=null;
+let characteristic=null;
+let rx=new Uint8Array(0);
+let logLines=0;
+let logVisible=true;
+let connecting=false;
+
+const $=id=>document.getElementById(id);
+const scoreEls=[];
+
+function buildScores(){
+  $("scores").innerHTML="";
+  scoreEls.length=0;
+
+  LABELS.forEach((label,index)=>{
+    const box=document.createElement("div");
+    box.className="score";
+
+    const name=document.createElement("div");
+    name.className="l";
+    name.textContent=`${label} · ${LABEL_NAMES[index]}`;
+
+    const value=document.createElement("div");
+    value.className="v";
+    value.textContent="0.00%";
+
+    box.append(name,value);
+    $("scores").appendChild(box);
+    scoreEls.push({box,val:value});
+  });
+}
+
+function log(msg,cls=""){
+  const root=$("log");
+  const line=document.createElement("div");
+
+  line.className=cls;
+  line.textContent=`[${new Date().toLocaleTimeString("zh-TW",{hour12:false})}] ${msg}`;
+
+  root.appendChild(line);
+  logLines++;
+
+  while(logLines>MAX_LOG_LINES && root.firstChild){
+    root.removeChild(root.firstChild);
+    logLines--;
+  }
+
+  root.scrollTop=root.scrollHeight;
+}
+
+function setConnected(connected){
+  $("status").textContent=connected?"● 已連線":"● 未連線";
+  $("status").classList.toggle("on",connected);
+  $("connect").disabled=connected;
+  $("disconnect").disabled=!connected;
+}
+
+function append(a,b){
+  const out=new Uint8Array(a.length+b.length);
+  out.set(a,0);
+  out.set(b,a.length);
+  return out;
+}
+
+function checksum(frame){
+  let sum=0;
+
+  for(let i=0;i<30;i++){
+    sum=(sum+frame[i])&0xFFFF;
+  }
+
+  return sum;
+}
+
+
+function withTimeout(promise,ms,message){
+  let timer;
+  const timeout=new Promise((_,reject)=>{
+    timer=setTimeout(()=>reject(new Error(message)),ms);
+  });
+  return Promise.race([promise,timeout]).finally(()=>clearTimeout(timer));
+}
+
+async function connectBLE(){
+  if(connecting)return;
+  if(device?.gatt?.connected){
+    log("BLE 已經連線");
+    return;
+  }
+
+  connecting=true;
+  $("connect").disabled=true;
+  $("connect").textContent="連線中...";
+
+  try{
+    if(!navigator.bluetooth){
+      throw new Error("此瀏覽器不支援 Web Bluetooth，請使用 Chrome 或 Edge");
+    }
+
+    log("開啟 BLE 裝置選擇器...");
+
+    device=await navigator.bluetooth.requestDevice({
+      filters:[{namePrefix:"Super_Smart_Racket"}],
+      optionalServices:[SERVICE_UUID]
+    });
+
+    device.removeEventListener("gattserverdisconnected",onDisconnected);
+    device.addEventListener("gattserverdisconnected",onDisconnected);
+
+    log(`連接 ${device.name||"(未命名)"}...`);
+
+    server=await withTimeout(
+      device.gatt.connect(),
+      8000,
+      "GATT 連線逾時"
+    );
+
+    /*
+     * Give the peripheral a short interval before service discovery.
+     */
+    await new Promise(resolve=>setTimeout(resolve,300));
+
+    if(!device.gatt.connected){
+      throw new Error("BLE 在 Service Discovery 前中斷");
+    }
+
+    const service=await withTimeout(
+      server.getPrimaryService(SERVICE_UUID),
+      5000,
+      "取得 FFF0 Service 逾時"
+    );
+
+    characteristic=await withTimeout(
+      service.getCharacteristic(NOTIFY_UUID),
+      5000,
+      "取得 FFF1 Characteristic 逾時"
+    );
+
+    characteristic.removeEventListener("characteristicvaluechanged",onNotify);
+    characteristic.addEventListener("characteristicvaluechanged",onNotify);
+
+    await withTimeout(
+      characteristic.startNotifications(),
+      5000,
+      "啟用 FFF1 Notify 逾時"
+    );
+
+    rx=new Uint8Array(0);
+    setConnected(true);
+    log("BLE 已連線，FFF1 Notify 已啟用","ok");
+  }
+  catch(e){
+    console.error(e);
+
+    try{
+      if(device?.gatt?.connected){
+        device.gatt.disconnect();
+      }
+    }catch(_){}
+
+    server=null;
+    characteristic=null;
+    rx=new Uint8Array(0);
+    setConnected(false);
+    log(`BLE 錯誤：${e.message}`,"bad");
+  }
+  finally{
+    connecting=false;
+    $("connect").textContent="連接 BLE";
+
+    if(!device?.gatt?.connected){
+      $("connect").disabled=false;
+    }
+  }
+}
+
+function disconnectBLE(){
+  if(device?.gatt?.connected){
+    device.gatt.disconnect();
+  }
+  else{
+    onDisconnected();
+  }
+}
+
+function onDisconnected(){
+  setConnected(false);
+  connecting=false;
+  server=null;
+  characteristic=null;
+  rx=new Uint8Array(0);
+  $("connect").textContent="連接 BLE";
+  $("connect").disabled=false;
+  log("BLE 已中斷","bad");
+}
+
+function onNotify(ev){
+  const value=ev.target.value;
+  const data=new Uint8Array(
+    value.buffer,
+    value.byteOffset,
+    value.byteLength
+  );
+
+  rx=append(rx,data);
+  parseRx();
+}
+
+function parseRx(){
+  while(rx.length>=2){
+    let start=-1;
+
+    for(let i=0;i<=rx.length-2;i++){
+      if(rx[i]===SYNC0 && rx[i+1]===SYNC1){
+        start=i;
+        break;
+      }
+    }
+
+    if(start<0){
+      rx=(rx[rx.length-1]===SYNC0)?rx.slice(-1):new Uint8Array(0);
+      return;
+    }
+
+    if(start>0){
+      rx=rx.slice(start);
+    }
+
+    if(rx.length<FRAME_SIZE){
+      return;
+    }
+
+    const frame=rx.slice(0,FRAME_SIZE);
+    rx=rx.slice(FRAME_SIZE);
+
+    parseFrame(frame);
+  }
+}
+
+function parseFrame(frame){
+  if(
+    frame[0]!==SYNC0 ||
+    frame[1]!==SYNC1 ||
+    frame[2]!==VERSION ||
+    frame[3]!==TYPE_AI
+  ){
+    return;
+  }
+
+  const dv=new DataView(frame.buffer,frame.byteOffset,frame.byteLength);
+  const receivedChecksum=dv.getUint16(30,true);
+  const calculatedChecksum=checksum(frame);
+
+  if(receivedChecksum!==calculatedChecksum){
+    log("丟棄 checksum 錯誤的 AI Frame","bad");
+    return;
+  }
+
+  const seq=dv.getUint32(4,true);
+  const labelIndex=dv.getUint8(12);
+  const confidence=dv.getUint8(13)/255;
+
+  if(labelIndex>=LABELS.length){
+    log(`丟棄無效 Label：${labelIndex}`,"bad");
+    return;
+  }
+
+  const scores=[];
+
+  for(let i=0;i<LABELS.length;i++){
+    const raw=dv.getUint16(14+i*2,true);
+
+    if(raw>10000){
+      log(`丟棄無效 Score：class=${LABELS[i]} raw=${raw}`,"bad");
+      return;
+    }
+
+    scores.push(raw/10000);
+  }
+
+  const label=LABELS[labelIndex];
+  const labelName=LABEL_NAMES[labelIndex];
+
+  $("result").textContent=`${label} · ${labelName}`;
+  $("confidence").textContent=`${(confidence*100).toFixed(2)}%`;
+  $("confbar").style.width=`${Math.min(100,confidence*100)}%`;
+  $("wait").textContent="已收到 AI 辨識結果";
+
+  scores.forEach((score,i)=>{
+    scoreEls[i].val.textContent=`${(score*100).toFixed(2)}%`;
+    scoreEls[i].box.classList.toggle("best",i===labelIndex);
+  });
+
+  const scoreText=scores
+    .map((score,i)=>`${LABELS[i]}=${(score*100).toFixed(1)}%`)
+    .join("  ");
+
+  log(
+    `AI #${seq} ${label}(${labelName}) ${(confidence*100).toFixed(2)}% | ${scoreText}`,
+    "ok"
+  );
+}
+
+function toggleLog(){
+  logVisible=!logVisible;
+  $("mainLayout").classList.toggle("log-hidden",!logVisible);
+  $("toggleLog").textContent=logVisible?"隱藏 Log":"顯示 Log";
+}
+
+function clearAll(){
+  $("result").textContent="--";
+  $("confidence").textContent="0.00%";
+  $("confbar").style.width="0%";
+  $("wait").textContent="等待 AI Notify...";
+
+  scoreEls.forEach(item=>{
+    item.val.textContent="0.00%";
+    item.box.classList.remove("best");
+  });
+
+  $("log").innerHTML="";
+  logLines=0;
+  rx=new Uint8Array(0);
+
+  log("Log 已清除");
+}
+
+buildScores();
+
+$("connect").addEventListener("click",connectBLE);
+$("disconnect").addEventListener("click",disconnectBLE);
+$("clear").addEventListener("click",clearAll);
+$("toggleLog").addEventListener("click",toggleLog);
+
+log(`網頁已就緒 (${UI_VERSION})，請按「連接 BLE」`);
+</script>
+</body>
+</html>
