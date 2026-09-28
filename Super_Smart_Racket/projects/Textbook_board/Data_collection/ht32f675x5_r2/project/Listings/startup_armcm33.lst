@@ -892,9 +892,9 @@ EAK]
 Command Line: --debug --xref --diag_suppress=9931,A1950W --cpu=Cortex-M33 --fpu
 =FPv5-SP --depend=.\objects\startup_armcm33.d -o.\objects\startup_armcm33.o -I.
 \RTE\_i2c -IC:\Users\corn9\AppData\Local\Arm\Packs\ARM\CMSIS\6.3.0\CMSIS\Core\I
-nclude -IC:\Users\corn9\AppData\Local\Arm\Packs\Holtek\HT32F675x5_DFP\1.0.5\Dev
+nclude -IC:\Users\corn9\AppData\Local\Arm\Packs\Holtek\HT32F675x5_DFP\1.0.6\Dev
 ice\Include -IC:\Users\corn9\AppData\Local\Arm\Packs\Holtek\HT32F675x5_DFP\1.0.
-5\Device\ARM\ARMCM33\Include --predefine="__MICROLIB SETA 1" --predefine="__UVI
+6\Device\ARM\ARMCM33\Include --predefine="__MICROLIB SETA 1" --predefine="__UVI
 SION_VERSION SETA 543" --predefine="_RTE_ SETA 1" --predefine="__MAIN_PROCESSOR
  SETA 1" --list=.\listings\startup_armcm33.lst ..\..\..\..\..\sources\device\ht
 32f675x5\Source\ARM\startup_ARMCM33.s

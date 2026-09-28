@@ -2,7 +2,7 @@ objects/ei_main.o: ei_main.cpp ei_main.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/classifier/ei_run_classifier.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/classifier/ei_model_types.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/classifier/ei_classifier_types.h \
- C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/pinpon/10.0.0/edgeimpulse/model-parameters/model_metadata.h \
+ C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/pinpon/11.0.0/edgeimpulse/model-parameters/model_metadata.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/classifier/ei_constants.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/dsp/numpy_types.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/dsp/ei_vector.h \
@@ -174,7 +174,7 @@ objects/ei_main.o: ei_main.cpp ei_main.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/tensorflow/lite/kernels/internal/reduce_common.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/tensorflow/lite/micro/kernels/softmax.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/classifier/ei_classifier_config.h \
- C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/pinpon/10.0.0/edgeimpulse/tflite-model/trained_model_ops_define.h \
+ C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/pinpon/11.0.0/edgeimpulse/tflite-model/trained_model_ops_define.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/tensorflow/lite/micro/micro_op_resolver.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/tensorflow/lite/micro/op_resolver_bridge.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/tensorflow/lite/core/api/op_resolver.h \
@@ -183,9 +183,9 @@ objects/ei_main.o: ei_main.cpp ei_main.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/tensorflow/lite/portable_type_to_tflitetype.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/tensorflow/lite/schema/schema_generated_full.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/classifier/ei_run_dsp.h \
- C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/pinpon/10.0.0/edgeimpulse/model-parameters/model_variables.h \
- C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/pinpon/10.0.0/edgeimpulse/model-parameters/model_metadata.h \
- C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/pinpon/10.0.0/edgeimpulse/tflite-model/tflite_learn_1111023_3_compiled.h \
+ C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/pinpon/11.0.0/edgeimpulse/model-parameters/model_variables.h \
+ C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/pinpon/11.0.0/edgeimpulse/model-parameters/model_metadata.h \
+ C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/pinpon/11.0.0/edgeimpulse/tflite-model/tflite_learn_1111023_3_compiled.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/classifier/inferencing_engines/engines.h \
  ../../../../../../sources/device/ht32f675x5/Include/ARMCM33_DSP_FP.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/Core/Include/core_cm33.h \

@@ -1,7 +1,7 @@
 objects/pooling.o: \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/tensorflow/lite/micro/kernels/pooling.cpp \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/classifier/ei_classifier_config.h \
- C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/pinpon/10.0.0/edgeimpulse/tflite-model/trained_model_ops_define.h \
+ C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/pinpon/11.0.0/edgeimpulse/tflite-model/trained_model_ops_define.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/tensorflow/lite/kernels/internal/reference/pooling.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/tensorflow/lite/kernels/internal/common.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/third_party/gemmlowp/fixedpoint/fixedpoint.h \

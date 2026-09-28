@@ -31,8 +31,8 @@
     Program header entries: 2
     Section header entries: 20
 
-    Program header offset: 120980 (0x0001d894)
-    Section header offset: 121044 (0x0001d8d4)
+    Program header offset: 121120 (0x0001d920)
+    Section header offset: 121184 (0x0001d960)
 
     Section header string table index: 19
 
@@ -5716,12 +5716,12 @@
         0x200069be:    3025        %0      DCW    12325
         0x200069c0:    00205832    2X .    DCD    2119730
     .L.str.7
-        0x200069c4:    333a3431    14:3    DCD    859452465
-        0x200069c8:    31313a35    5:11    DCD    825309749
+        0x200069c4:    353a3131    11:5    DCD    893006129
+        0x200069c8:    31303a39    9:01    DCD    825244217
         0x200069cc:    00          .       DCB    0
     .L.str.6
         0x200069cd:    536570      Sep     DCB    83,101,112
-        0x200069d0:    20353220     25     DCD    540357152
+        0x200069d0:    20383220     28     DCD    540553760
         0x200069d4:    36323032    2026    DCD    909258802
         0x200069d8:    00          .       DCB    0
     .L.str
@@ -5875,7 +5875,7 @@
 
 
 ** Section #10 '.debug_info' (SHT_PROGBITS)
-    Size   : 17063 bytes
+    Size   : 17079 bytes
 
 
 ** Section #11 '.debug_line' (SHT_PROGBITS)
@@ -5891,7 +5891,7 @@
 
 
 ** Section #14 '.debug_str' (SHT_PROGBITS)
-    Size   : 18340 bytes
+    Size   : 18466 bytes
 
 
 ** Section #15 '.symtab' (SHT_SYMTAB)

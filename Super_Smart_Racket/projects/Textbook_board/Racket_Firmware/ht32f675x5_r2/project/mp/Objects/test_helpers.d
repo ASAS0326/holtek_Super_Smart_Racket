@@ -70,7 +70,7 @@ objects/test_helpers.o: \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/tensorflow/lite/kernels/internal/reduce_common.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/tensorflow/lite/micro/kernels/softmax.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/classifier/ei_classifier_config.h \
- C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/pinpon/10.0.0/edgeimpulse/tflite-model/trained_model_ops_define.h \
+ C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/pinpon/11.0.0/edgeimpulse/tflite-model/trained_model_ops_define.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/tensorflow/lite/micro/micro_op_resolver.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/tensorflow/lite/micro/op_resolver_bridge.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/tensorflow/lite/core/api/op_resolver.h \

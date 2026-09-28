@@ -1,7 +1,7 @@
 objects/softmax.o: \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/tensorflow/lite/micro/kernels/softmax.cpp \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/classifier/ei_classifier_config.h \
- C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/pinpon/10.0.0/edgeimpulse/tflite-model/trained_model_ops_define.h \
+ C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/pinpon/11.0.0/edgeimpulse/tflite-model/trained_model_ops_define.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/tensorflow/lite/micro/kernels/softmax.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/classifier/ei_classifier_config.h \
  C:/Users/corn9/AppData/Local/Arm/Packs/EdgeImpulse/EI-SDK/1.95.14/edgeimpulse/edge-impulse-sdk/tensorflow/lite/c/builtin_op_data.h \

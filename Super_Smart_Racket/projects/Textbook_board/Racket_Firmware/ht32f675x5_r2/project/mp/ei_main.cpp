@@ -31,7 +31,8 @@ extern "C" {
 #define WINDOW_SAMPLES EI_CLASSIFIER_RAW_SAMPLE_COUNT
 #define SAMPLES_AFTER_PEAK (WINDOW_SAMPLES - SWING_PEAK_INDEX - 1U)
 
-static_assert(EI_CLASSIFIER_PROJECT_ID == 1111023, "Select the pinpon model pack in the MP project.");
+static_assert(EI_CLASSIFIER_PROJECT_ID == 1111023 && EI_CLASSIFIER_PROJECT_DEPLOY_VERSION == 11,
+              "Select the pinpon 11.0.0 model pack in the MP project.");
 static_assert(EI_CLASSIFIER_RAW_SAMPLES_PER_FRAME == AXIS_COUNT, "Model must have six axes.");
 static_assert(EI_CLASSIFIER_RAW_SAMPLE_COUNT == 52 &&
               EI_CLASSIFIER_DSP_INPUT_FRAME_SIZE == 52 * AXIS_COUNT,

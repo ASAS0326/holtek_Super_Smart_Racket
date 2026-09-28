@@ -8114,7 +8114,7 @@ uint64_t ei_read_timer_ms() { return ei_read_timer_us() / 1000U; }
 10005cc2:	25fa      	movs	r5, #250	@ 0xfa
 10005cc4:	231f      	movs	r3, #31
 10005cc6:	2234      	movs	r2, #52	@ 0x34
-10005cc8:	210a      	movs	r1, #10
+10005cc8:	210b      	movs	r1, #11
 10005cca:	e9cd 6701 	strd	r6, r7, [sp, #4]
 10005cce:	4806      	ldr	r0, [pc, #24]	@ (10005ce8 <ei_main+0x358>)
 10005cd0:	9500      	str	r5, [sp, #0]

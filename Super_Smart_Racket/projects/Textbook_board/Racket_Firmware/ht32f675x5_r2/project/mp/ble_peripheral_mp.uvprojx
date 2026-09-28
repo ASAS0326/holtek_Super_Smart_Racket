@@ -426,7 +426,7 @@
           <targetInfo name="ble_peripheral_mp" versionMatchMode="fixed"/>
         </targetInfos>
       </package>
-      <package name="pinpon" vendor="EdgeImpulse" version="10.0.0">
+      <package name="pinpon" vendor="EdgeImpulse" version="11.0.0">
         <targetInfos>
           <targetInfo name="ble_peripheral_mp" versionMatchMode="fixed"/>
         </targetInfos>
@@ -463,8 +463,8 @@
           <targetInfo name="ble_peripheral_mp"/>
         </targetInfos>
       </component>
-      <component Cclass="EdgeImpulse" Cgroup="model" Csub="pinpon" Cvendor="EdgeImpulse" Cversion="10.0.0" condition="CMSIS packages" ymlID="EdgeImpulse:model:pinpon">
-        <package name="pinpon" schemaVersion="1.7.7" url="" vendor="EdgeImpulse" version="10.0.0"/>
+      <component Cclass="EdgeImpulse" Cgroup="model" Csub="pinpon" Cvendor="EdgeImpulse" Cversion="11.0.0" condition="CMSIS packages" ymlID="EdgeImpulse:model:pinpon">
+        <package name="pinpon" schemaVersion="1.7.7" url="" vendor="EdgeImpulse" version="11.0.0"/>
         <targetInfos>
           <targetInfo name="ble_peripheral_mp"/>
         </targetInfos>
