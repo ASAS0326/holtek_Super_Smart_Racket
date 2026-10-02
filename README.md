@@ -160,9 +160,3 @@ ble_Super_Smart_Racket/
 1. 用對應板子的 `Data_collection` 韌體＋`collect_training_data.py` 透過序列埠收集各動作類別的六軸資料（CSV）。
 2. 把資料上傳到 Edge Impulse Studio（67595 對應 `pinpon` 專案，49395 對應 `pinpon2` 專案），設定 Impulse 的 Window size／Frequency，訓練後以 **Keil CMSIS pack** 格式匯出。
 3. 安裝匯出的 pack、在對應 `Racket_Firmware` 的 Keil 專案裡把 RTE 的 pinpon／pinpon2 元件切到新版本，同步更新 `ei_main.cpp` 裡對應的 `static_assert`（`EI_CLASSIFIER_PROJECT_DEPLOY_VERSION`、`RAW_SAMPLE_COUNT`／`SWING_WINDOW`、`DSP_INPUT_FRAME_SIZE` 等），重新編譯燒錄。
-
----
-
-## 📝 更新日誌
-
-詳細變更歷史請見 [CHANGELOG.md](CHANGELOG.md)。
