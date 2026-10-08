@@ -223,7 +223,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\LSM6DS3.c</PathWithFileName>
+      <PathWithFileName>..\src\LSM6DS3.c</PathWithFileName>
       <FilenameWithoutPath>LSM6DS3.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -235,7 +235,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\LSM6DS3.h</PathWithFileName>
+      <PathWithFileName>..\src\LSM6DS3.h</PathWithFileName>
       <FilenameWithoutPath>LSM6DS3.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>

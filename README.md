@@ -48,7 +48,9 @@ LSM6DS3 (IMU, 104 Hz)
 ### 📖 使用手冊
 
 - Homemade_board 完整圖文教學請見 [`Teaching_Material/Homemade_board使用手冊.pptx`](<Teaching_Material/Homemade_board使用手冊.pptx>)
-- Textbook_board 完整圖文教學請見 [`Teaching_Material/Textbook_board使用手冊.pptx`](<Teaching_Material/Textbook_board使用手冊.pptx>)
+- Textbook_board 完整圖文教學請見 [`Teaching_Material/Textbook_board使用手冊V2.pptx`](<Teaching_Material/Textbook_board使用手冊V2.pptx>)
+- HT32F67595 課程教材請見 [`Teaching_Material/20261008_第八章_HT32F67595_LSM6DS3TR_TinyML_V1.pptx`](<Teaching_Material/20261008_第八章_HT32F67595_LSM6DS3TR_TinyML_V1.pptx>)
+- HT32F49395 課程教材請見 [`Teaching_Material/20261008_第四章_HT32F49395_LSM6DS3TR_TinyML_V1.pptx`](<Teaching_Material/20261008_第四章_HT32F49395_LSM6DS3TR_TinyML_V1.pptx>)
 
 ---
 
@@ -57,12 +59,15 @@ LSM6DS3 (IMU, 104 Hz)
 ```
 ble_Super_Smart_Racket/
 ├── index.html                          # 網頁版 BLE 接收頁（Web Bluetooth）
+├── collect_training_data.py            # 訓練資料收集腳本（與兩個 Data_collection 內的版本相同）
 ├── APK/
 │   ├── app-release.apk                 # Android App 安裝檔
 │   └── apk.png                         # App 下載 QR Code
 ├── Teaching_Material/
 │   ├── Homemade_board使用手冊.pptx      # Homemade_board 圖文使用手冊
-│   └── Textbook_board使用手冊.pptx      # Textbook_board 圖文使用手冊
+│   ├── Textbook_board使用手冊V2.pptx    # Textbook_board 圖文使用手冊
+│   ├── 20261008_第八章_HT32F67595_LSM6DS3TR_TinyML_V1.pptx   # HT32F67595 課程教材
+│   └── 20261008_第四章_HT32F49395_LSM6DS3TR_TinyML_V1.pptx   # HT32F49395 課程教材
 ├── Super_Smart_Racket_67595/            # HT32F675x5 雙核心韌體與 SDK
 │   ├── projects/
 │   │   ├── Textbook_board/              # 官方 HT32F67595 開發板
@@ -73,7 +78,7 @@ ble_Super_Smart_Racket/
 │   └── libraries/, sources/, third_party/, tools/   # Holtek HT32 SDK 底層庫與工具
 └── Super_Smart_Racket_49395/            # HT32F49395 單核心韌體與 SDK
     ├── project/ht32f49395_sk/examples/Super_Smart_Racket/
-    │   ├── Racket_Firmware/             # 燒進球拍的正式韌體（LSM6DS3 + Edge Impulse + 外接 BLE 模組）
+    │   ├── Run_Classification/          # 燒進球拍的正式韌體（LSM6DS3 + Edge Impulse + 外接 BLE 模組）
     │   └── Data_collection/             # 訓練資料收集韌體 + Python 收集腳本
     └── libraries/, middlewares/, utilities/   # Holtek HT32F493x5 SDK 底層庫與工具
 ```
@@ -91,7 +96,7 @@ ble_Super_Smart_Racket/
 | IMU | LSM6DS3（6 軸：加速度＋陀螺儀） | ICM-20948（9 軸，含磁力計，但推論只用六軸） | LSM6DS3（6 軸：加速度＋陀螺儀） |
 | BLE | 晶片內建 BLE stack（CP 負責） | 晶片內建 BLE stack（CP 負責） | 外接 BM67C593 模組，MCU 經 UART4（PA0/PA1，9600 8N1）轉送封包 |
 | AI 模型 | Edge Impulse 專案 `pinpon`（`EdgeImpulse.pinpon.*` pack） | Edge Impulse 專案 `pinpon`（`EdgeImpulse.pinpon.*` pack） | Edge Impulse 專案 `pinpon2`（`EdgeImpulse.pinpon2.*` pack） |
-| 韌體位置 | `Super_Smart_Racket_67595/projects/Textbook_board/Racket_Firmware` | `Super_Smart_Racket_67595/projects/Homemade_board/ble_peripheral` | `Super_Smart_Racket_49395/project/ht32f49395_sk/examples/Super_Smart_Racket/Racket_Firmware` |
+| 韌體位置 | `Super_Smart_Racket_67595/projects/Textbook_board/Racket_Firmware` | `Super_Smart_Racket_67595/projects/Homemade_board/ble_peripheral` | `Super_Smart_Racket_49395/project/ht32f49395_sk/examples/Super_Smart_Racket/Run_Classification` |
 
 - **HT32F675x5 系列**使用雙核心架構：MP 負責感測器讀取與 AI 推論，CP 負責 BLE 傳輸，兩核心透過共用記憶體＋sequence lock 交換資料。
 - **HT32F49395** 是單核心 MCU，沒有 MP/CP 分工：IMU 取樣（SysTick 1 ms 中斷驅動、0.6 秒 FIFO 緩衝）、揮拍偵測、AI 推論、BLE 封包轉送都在同一顆核心上完成，再透過 UART4 交給外接的 BM67C593 BLE 模組廣播與傳送；該模組已設定為與 67595 系列相同的 Service／Notify UUID，因此手機 App 與網頁接收端完全不用區分板子。
@@ -110,14 +115,14 @@ ble_Super_Smart_Racket/
 | FS | 正手拍 |
 | NONE | 無動作（不會顯示／不會傳送） |
 
-兩塊板子各自對應一個 [Edge Impulse](https://edgeimpulse.com/) 專案（67595 為 `pinpon`，49395 為 `pinpon2`），輸入皆為六軸（Ax, Ay, Az, Gx, Gy, Gz）、52 個取樣點的滑動視窗，int8 量化、內建 StandardScaler 正規化。
+兩塊板子各自對應一個 [Edge Impulse](https://edgeimpulse.com/) 專案（67595 為 `pinpon`，49395 為 `pinpon2`），輸入皆為六軸（Ax, Ay, Az, Gx, Gy, Gz）、52 個取樣點（約 0.5 秒）的視窗，內建 StandardScaler 正規化（67595 的 `pinpon` 為 int8 量化模型）。
 
 事件判定採**峰值觸發（peak-triggered）單次推論**：
 
 1. 當角速度幅值 `|gyro|` 上升超過門檻（250 dps）視為一次揮拍開始。
 2. 持續追蹤至峰值不再變大即鎖定峰值位置（視窗第 31 個取樣點）。
 3. 以峰值為中心切出固定視窗，只做**一次**推論（不是連續視窗投票）。
-4. 推論後需信心度達到門檻（0.70）才會回報為有效揮拍類別，否則視為 `NONE`。
+4. 推論結果為 `NONE` 時不回報。67595 另需信心度達到門檻（0.70）才會回報；49395 只要結果不是 `NONE` 就回報。
 5. 回報後有約 0.45 秒（47 個取樣）的不反應期，避免回拍動作被誤判成下一次揮拍；`NONE` 結果不觸發不反應期。
 
 ---
@@ -136,7 +141,7 @@ ble_Super_Smart_Racket/
 | 2 | version | `01` |
 | 3 | type | `02`（AI 結果） |
 | 4–7 | seq | uint32，封包序號 |
-| 8–11 | tick_us | uint32，代表視窗的取樣時鐘 |
+| 8–11 | tick_us | uint32，揮拍峰值樣本的時間（µs） |
 | 12 | label | 0=BC, 1=BP, 2=BS, 3=FC, 4=FP, 5=FS, 6=NONE |
 | 13 | confidence | uint8，機率 ×255 |
 | 14–27 | score[7] | 七個 uint16，各類機率 ×10000 |
@@ -149,14 +154,14 @@ ble_Super_Smart_Racket/
 
 ## 🚀 開發環境
 
-- **IDE**：Keil MDK（uVision），韌體使用 GNU Arm Embedded 工具鏈編譯；HT32F49395 系列另附 HT32-IDE（Eclipse based）專案
+- **IDE**：Keil MDK（uVision）。含 AI 推論的韌體（67595 的 MP 專案、49395 的 Run_Classification）使用 GNU Arm Embedded 工具鏈編譯，其餘專案（67595 的 CP 專案、兩個 Data_collection）使用 Arm Compiler 6；兩條線都另附 HT32-IDE（Eclipse based）專案
 - **AI 模型**：以 CMSIS-Pack 形式安裝（67595 為 `EdgeImpulse.pinpon.x.0.0`，49395 為 `EdgeImpulse.pinpon2.x.0.0`），在 Keil 專案的 RTE 設定裡選擇對應版本
 - **燒錄**：
-  - 67595：`Super_Smart_Racket_67595/projects/Textbook_board/Racket_Firmware/ht32f675x5_r2/hex/ble_peripheral.hex` 是 MP+CP 合併後的燒錄檔
-  - 49395：於 `Super_Smart_Racket_49395/project/ht32f49395_sk/examples/Super_Smart_Racket/Racket_Firmware/mdk_v5` 用 Keil 編譯後燒錄
+  - 67595：`Super_Smart_Racket_67595/projects/Textbook_board/Racket_Firmware/ht32f675x5_r2/hex/ble_peripheral.hex` 是 MP+CP 合併後的燒錄檔；資料收集韌體為 `Super_Smart_Racket_67595/projects/Textbook_board/Data_collection/ht32f675x5_r2/hex/i2c.hex`
+  - 49395：於 `Super_Smart_Racket_49395/project/ht32f49395_sk/examples/Super_Smart_Racket/Run_Classification/mdk_v5` 用 Keil 編譯後燒錄
 
 ### 訓練自己的模型
 
 1. 用對應板子的 `Data_collection` 韌體＋`collect_training_data.py` 透過序列埠收集各動作類別的六軸資料（CSV）。
 2. 把資料上傳到 Edge Impulse Studio（67595 對應 `pinpon` 專案，49395 對應 `pinpon2` 專案），設定 Impulse 的 Window size／Frequency，訓練後以 **Keil CMSIS pack** 格式匯出。
-3. 安裝匯出的 pack、在對應 `Racket_Firmware` 的 Keil 專案裡把 RTE 的 pinpon／pinpon2 元件切到新版本，同步更新 `ei_main.cpp` 裡對應的 `static_assert`（`EI_CLASSIFIER_PROJECT_DEPLOY_VERSION`、`RAW_SAMPLE_COUNT`／`SWING_WINDOW`、`DSP_INPUT_FRAME_SIZE` 等），重新編譯燒錄。
+3. 安裝匯出的 pack、在對應韌體（67595 為 `Racket_Firmware` 的 MP 專案，49395 為 `Run_Classification`）的 Keil 專案裡把 RTE 的 pinpon／pinpon2 元件切到新版本，同步更新 `ei_main.cpp` 裡對應的 `static_assert`（`EI_CLASSIFIER_PROJECT_DEPLOY_VERSION`、`RAW_SAMPLE_COUNT`／`SWING_WINDOW`、`DSP_INPUT_FRAME_SIZE` 等），重新編譯燒錄。

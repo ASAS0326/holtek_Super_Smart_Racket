@@ -402,12 +402,12 @@
             <File>
               <FileName>LSM6DS3.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\LSM6DS3.c</FilePath>
+              <FilePath>..\src\LSM6DS3.c</FilePath>
             </File>
             <File>
               <FileName>LSM6DS3.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\LSM6DS3.h</FilePath>
+              <FilePath>..\src\LSM6DS3.h</FilePath>
             </File>
           </Files>
         </Group>
